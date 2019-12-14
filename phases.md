@@ -33,6 +33,14 @@ Note: We know this is a hard activity. We know you aren't yet comfortable with N
 * Create a few array variables that will hold the data
 
 * Create a set of routes for getting and posting table data
+    * "/" -> home.html (get)
+    * "/tables" -> table.html (get)
+    * "/reserve" -> reserve.html(get)
+    
+    * APIs
+        * Submit "/api/tables" -> reserve.html(POST)
+        * /api/crurrentReservations -> res.json(<all reservations>)
+        * /api/waitingList -> res.json(<all reservations in waiting list>)
 
 * Create a set of routes for displaying the HTML pages
 
