@@ -10,7 +10,15 @@ const tables = [
         routeName: "superman",
         name: "Superman",
         phone: "119",
-        email: "123@123.com"
+        email: "123@123.com",
+        uniqueId: 1
+    },
+    {
+        routeName: "aquaman",
+        name: "Aquaman",
+        phone: "999",
+        email: "1234@1234.com",
+        uniqueId: 2
     }
 ];
 
@@ -32,7 +40,9 @@ app.get("/reserve", (req, res) => {
 //dealing with the post 
 app.post("/", (req, res) => {
     let newTable = req.body;
-
+    console.log(newTable);
+    tables.push(newTable);
+    res.json(newTable);
 });
 
 //server listening on port 3000
