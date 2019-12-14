@@ -96,7 +96,7 @@
                 cardNumber: $("#cardNumber").val().trim()
             };
 
-            $.post("/api/makeReservation", newReservation)
+            $.post("/api/makereservation", newReservation)
                 .then(function (data) {
                     console.log("reserve.html", data);
                     alert("Add Reservation");
