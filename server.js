@@ -1,5 +1,6 @@
 const express = require("express");
 const path = require("path");
+const uniqueId = require("shortid");
 
 const reservations = require("./data/reservationData");
 const waitingList = require("./data/waitlistData");
@@ -35,7 +36,7 @@ app.get("/api/waitingList",  (req, res) => {
 //dealing with the post 
 app.post("/api/tables", (req, res) => {
     let newTable = req.body;
-    newTable.routeName = newTable.name.replace(/\s+/g, "").toLowerCase();
+    newTable.uniqueId = uniqueId.generate();
     console.log(newTable);
     waitingList.push(newTable);
     res.json(newTable);
