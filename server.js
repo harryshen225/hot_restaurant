@@ -1,26 +1,11 @@
 const express = require("express");
 const path = require("path");
 
+const reservations = require("./data/reservationData");
+const waitingList = require("./data/waitlistData");
+
 const app = express();
 const PORT = 3000;
-
-//waiting list - table data
-const tables = [
-    {
-        routeName: "superman",
-        name: "Superman",
-        phone: "119",
-        email: "123@123.com",
-        uniqueId: 1
-    },
-    {
-        routeName: "aquaman",
-        name: "Aquaman",
-        phone: "999",
-        email: "1234@1234.com",
-        uniqueId: 2
-    }
-];
 
 //router to home.html
 app.get("/", (req, res) => {
@@ -37,11 +22,21 @@ app.get("/reserve", (req, res) => {
     res.sendFile(path.join(__dirname, "/templates/reserve.html"));
 });
 
+//api request for reservations
+app.get("/api/currentReservations",  (req, res) => {
+    res.json(reservations);
+});
+
+//api request for waitinglist
+app.get("/api/waitingList",  (req, res) => {
+    res.json(waitingList);
+});
+
 //dealing with the post 
-app.post("/", (req, res) => {
+app.post("/api/tables", (req, res) => {
     let newTable = req.body;
     console.log(newTable);
-    tables.push(newTable);
+    waitingList.push(newTable);
     res.json(newTable);
 });
 
