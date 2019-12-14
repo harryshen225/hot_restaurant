@@ -2,11 +2,20 @@ const express = require("express");
 const path = require("path");
 const uniqueId = require("shortid");
 
-const reservations = require("./data/reservationData");
-const waitingList = require("./data/waitlistData");
+// const reservations = require("./data/reservationData");
+// const waitingList = require("./data/waitlistData");
 
+const fs = require("fs");
+const util = require("util");
+const readFileAsync = util.promisify(fs.readFile);
+const writeFileAsync = util.promisify(fs.writeFile);
 const app = express();
 const PORT = 3000;
+let reservationData= [];
+
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 //router to home.html
 app.get("/", (req, res) => {
@@ -34,11 +43,12 @@ app.get("/api/waitingList",  (req, res) => {
 });
 
 //dealing with the post 
-app.post("/api/makereservation", (req, res) => {
+app.post("/api/makereservation", async (req, res) => {
     const newTable = req.body;
     newTable.uniqueId = uniqueId.generate();
     console.log(newTable);
-    waitingList.push(newTable);
+    reservationData.push(newTable);
+    await writeFileAsync("./data/reservationData.json",JSON.stringify(newTable,null,2));
     res.json(newTable);
 });
 
