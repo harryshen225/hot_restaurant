@@ -35,7 +35,7 @@ app.get("/api/waitingList",  (req, res) => {
 
 //dealing with the post 
 app.post("/api/tables", (req, res) => {
-    let newTable = req.body;
+    const newTable = req.body;
     newTable.uniqueId = uniqueId.generate();
     console.log(newTable);
     waitingList.push(newTable);

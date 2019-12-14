@@ -2,7 +2,6 @@
 
 const waitlistData = [
     {
-        routeName: "tri",
         name: "Tri",
         phone: "114",
         email: "1@1.com",
